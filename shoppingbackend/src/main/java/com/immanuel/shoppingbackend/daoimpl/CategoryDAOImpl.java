@@ -1,6 +1,5 @@
 package com.immanuel.shoppingbackend.daoimpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -19,51 +18,62 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	private static List<Category> categories=new ArrayList<Category>();
-	static {
-		
-		Category category =new Category();
-		category.setId(1);
-		category.setName("TV");
-		category.setDescription("this is a tv");
-		category.setImageURL("cat_10.png");
-		category.setActive(true);
-		
-		categories.add(category);
-		
-	}
-
 	@Override
 
 	public boolean add(Category category) {
 
 		try {
-			// add the category to the database table
 			sessionFactory.getCurrentSession().persist(category);
-			return true;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			return false;
 		}
+		return true;
 
 	}
-
-	
 
 	@Override
 	public List<Category> list() {
 		// TODO Auto-generated method stub
-		return categories;
+		
+		String queryString="FROM Category where active = :active";
+		Query query=sessionFactory.getCurrentSession().createQuery(queryString);
+		query.setParameter("active", true);
+		
+		return query.getResultList();
 	}
-
-
 
 	@Override
 	public Category get(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
 	}
 
+	@Override
+	public boolean update(Category category) {
 
+		try {
+
+			sessionFactory.getCurrentSession().update(category);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
+
+	}
+
+	@Override
+	public boolean delete(Category category) {
+		category.setActive(false);
+		try {
+			sessionFactory.getCurrentSession().update(category);
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 
 }

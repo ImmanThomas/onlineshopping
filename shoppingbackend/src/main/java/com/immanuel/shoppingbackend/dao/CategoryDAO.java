@@ -8,9 +8,14 @@ public interface CategoryDAO {
 
 	
 	
+	
+	
+	Category get(int id);
 	List<Category> list();
 	boolean add(Category category);
-	Category get(int id);
+	boolean update(Category category);
+	boolean delete(Category category);
+	
 
 	
 	
