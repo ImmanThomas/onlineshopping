@@ -20,15 +20,13 @@
 
 					<c:if test="${userClickAllProducts == true}">
 					
-						<script>
-							window.categoryId = '';
-						</script>
+						
 					
 						<ol class="breadcrumb">
 
 
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">All Products</li>
+							<li class="breadcrumb-item"><a href="${contextRoot}/home">Home</a></li>
+							<li class="breadcrumb-item active">All Products</li>
 
 
 						</ol>
@@ -36,21 +34,19 @@
 					
 					
 					<c:if test="${userClickCategoryProducts == true}">
-						<script>
-							window.categoryId = '${category.id}';
-						</script>
+						
 					
 						<ol class="breadcrumb">
 
 
-							<li><a href="${contextRoot}/home">Home</a></li>
-							<li class="active">Category</li>
-							<li class="active">${category.name}</li>
+							<li class="breadcrumb-item"><a href="${contextRoot}/home">Home</a></li>
+							<li class="breadcrumb-item active">Category</li>
+							<li class="breadcrumb-item active">${category.name}</li>
 
 
 						</ol>
 					</c:if>
-					
+				 	
 
 				</div>
 

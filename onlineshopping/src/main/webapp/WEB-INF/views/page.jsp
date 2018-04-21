@@ -28,7 +28,7 @@
 <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
 <!-- Bootstrap Readable Theme -->
-<link href="${css}/bootstrap-readable-theme.css" rel="stylesheet">
+<link href="${css}/bootstrap-theme.css" rel="stylesheet">
 
 
 
@@ -42,8 +42,8 @@
 </head>
 
 <body>
-	
-	
+
+
 	<div class="wrapper">
 
 		<!-- Navigation -->
@@ -52,7 +52,7 @@
 		<!-- Page Content -->
 
 		<div class="content">
-			
+
 			<!-- Loading the home content -->
 			<c:if test="${userClickHome == true }">
 				<%@include file="home.jsp"%>
@@ -67,14 +67,15 @@
 			<c:if test="${userClickContact == true }">
 				<%@include file="contact.jsp"%>
 			</c:if>
-			
+
 			<!-- Load only when user clicks contact -->
-			<c:if test="${userClickAllProducts == true or userClickCategoryProducts == true }">
+			<c:if
+				test="${userClickAllProducts == true or userClickCategoryProducts == true }">
 				<%@include file="listProducts.jsp"%>
-			</c:if>	
-			
-			
-			
+			</c:if>
+
+
+
 
 		</div>
 
@@ -85,16 +86,18 @@
 		<!-- jQuery -->
 		<script src="${js}/jquery.js"></script>
 
-		
+
 
 		<!-- Bootstrap Core JavaScript -->
 		<script src="${js}/bootstrap.min.js"></script>
+
+
+		<!-- BootStrap Bundle js -->
+
+		<script src="${js}/bootstrap.bundle.min.js"></script>
 		
 	
-		
-	
-	
-		
+
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>
 
