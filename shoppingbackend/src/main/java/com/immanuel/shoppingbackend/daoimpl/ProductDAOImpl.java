@@ -3,6 +3,7 @@ package com.immanuel.shoppingbackend.daoimpl;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
+
 	@Override
 	public Product get(int id) {
 		// TODO Auto-generated method stub
@@ -24,44 +26,76 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> list() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String queryProduct = "FROM Product ";
+		Query<Product> query = sessionFactory.getCurrentSession().createQuery(queryProduct);
+
+		return query.getResultList();
 	}
 
 	@Override
 	public boolean add(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		try {
+			sessionFactory.getCurrentSession().persist(product);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean update(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			sessionFactory.getCurrentSession().update(product);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public boolean delete(Product product) {
 		// TODO Auto-generated method stub
-		return false;
+		try {
+			product.setActive(false);
+			sessionFactory.getCurrentSession().update(product);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public List<Product> listActiveProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		String queryProduct = "FROM Product where active = :active";
+		Query<Product> query = sessionFactory.getCurrentSession().createQuery(queryProduct);
+		query.setParameter("active", true);
+		return query.getResultList();
+
 	}
 
 	@Override
 	public List<Product> listActiveProductsByCategory(int categoryID) {
 		// TODO Auto-generated method stub
-		return null;
+		String queryProductByCatgeory = "FROM Product where active = :active AND categoryID = :categoryid";
+		Query<Product> query = sessionFactory.getCurrentSession().createQuery(queryProductByCatgeory);
+		query.setParameter("active", true);
+		query.setParameter("categoryid", categoryID);
+		return query.getResultList();
 	}
 
 	@Override
 	public List<Product> getLatestActiveProducts(int count) {
 		// TODO Auto-generated method stub
-		return null;
+		String queryLatestProduct = "FROM Product where active = :active ORDER BY id desc";
+		Query<Product> query = sessionFactory.getCurrentSession().createQuery(queryLatestProduct);
+		query.setParameter("active", true);
+
+		return query.setFirstResult(0).setMaxResults(count).getResultList();
 	}
 
 }
