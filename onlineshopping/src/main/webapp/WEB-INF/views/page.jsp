@@ -19,9 +19,7 @@
 
 <script>
 	window.menu = '${title}';
-	
-	
-	
+	window.contextRoot = "${contextRoot}";
 </script>
 
 <!-- Bootstrap Core CSS -->
@@ -30,7 +28,11 @@
 <!-- Bootstrap Readable Theme -->
 <link href="${css}/bootstrap-theme.css" rel="stylesheet">
 
+<!-- Bootstrap datatables -->
+<link href="${css}/dataTables.bootstrap4.css" rel="stylesheet">
 
+<!-- font awesome cdn -->
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
 
 
@@ -95,8 +97,14 @@
 		<!-- BootStrap Bundle js -->
 
 		<script src="${js}/bootstrap.bundle.min.js"></script>
-		
-	
+
+
+
+		<!--  Data Tables  -->
+		<script src="${js}/jquery.dataTables.js"></script>
+
+		<!-- bootstrap Data Tables  -->
+		<script src="${js}/dataTables.bootstrap4.js"></script>
 
 		<!-- Self coded javascript -->
 		<script src="${js}/myapp.js"></script>

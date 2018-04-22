@@ -10,32 +10,39 @@ import javax.persistence.Id;
 
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 	private String code;
 	private String name;
-	
 
 	private String brand;
+	@JsonIgnore
 	private String description;
 	@Column(name = "unit_price")
 	private double unitPrice;
 
 	@Column(name = "is_active")
+	@JsonIgnore
 	private boolean active;
+
 	@Column(name = "category_id")
+	@JsonIgnore
 	private int categoryID;
 	@Column(name = "supplier_id")
+	@JsonIgnore
 	private int supplierID;
 	private int purchases;
 	private int views;
 
 	public Product() {
-		this.code = "PRD"+UUID.randomUUID().toString().substring(26).toUpperCase();
+		this.code = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 
 	public int getId() {
@@ -136,7 +143,6 @@ public class Product {
 
 	private int quantity;
 
-	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
